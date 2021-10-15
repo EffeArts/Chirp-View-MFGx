@@ -12,5 +12,9 @@
   "devDependencies": {
     "mocha": "9.0.1",
     "mocha-cli": "1.0.1"
+  },
+  "dependencies": {
+    "moment": "^2.29.1",
+    "node-emoji": "^1.11.0"
   }
 }
