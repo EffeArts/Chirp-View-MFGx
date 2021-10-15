@@ -13,7 +13,7 @@ const truncateMsg = (msg, len) => {
 };
 
 const formatDate = (date) => {
-    return moment(date).format('MM/DD/YYYY');
+    return moment.parseZone(date).format('MM/DD/YYYY');
 };
 
 const hasEmoji = (views) => {
