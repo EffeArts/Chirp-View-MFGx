@@ -12,13 +12,11 @@ const truncateMsg = (msg, len) => {
   return msg.substring(0, maxLen - (diff + suffix.length)) + suffix;
 };
 
-const formatDate = (date) => {
-    return moment.parseZone(date).format('MM/DD/YYYY');
-};
+const formatDate = (date) => moment.parseZone(date).format('MM/DD/YYYY');;
 
-const hasEmoji = (views) => {
+const deserveEmoji = (views) => {
   return parseInt(views) > 100000  ? true : false;
-}
+};
 
 const formatChirpView = (chirpView) => {
   const msg = chirpView.message;
@@ -28,7 +26,7 @@ const formatChirpView = (chirpView) => {
 
   let output = msg + " " + formatDate(date) + " " + viewCount + " " + author;
 
-  if(hasEmoji(viewCount)){
+  if(deserveEmoji(viewCount)){
     const fireEmoji = " " + emoji.get("fire");
     output += fireEmoji;
   }
@@ -37,7 +35,7 @@ const formatChirpView = (chirpView) => {
 
   if(outputLen > 140){
     output = truncateMsg(msg, outputLen) + " " + formatDate(date) + " " + viewCount + " " + author;
-    if(hasEmoji(viewCount)){
+    if(deserveEmoji(viewCount)){
       const fireEmoji = " " + emoji.get("fire");
       output += fireEmoji;
     }

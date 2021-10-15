@@ -17,12 +17,14 @@ describe('#formatChirpView', () => {
   it('should properly add fire emoji when views exceed 100,000', () => {
     assert.strictEqual(
       "This chirp probably won't get a lot of attention. 03/04/2021 251236 Jane Doe 🔥",
-      {
-        message: "This chirp probably won't get a lot of attention.",
-        author: 'Jane Doe',
-        views: 251236,
-        date: '2021-03-04T04:00:00.000Z',
-      }
+      formatChirpView(
+        {
+          message: "This chirp probably won't get a lot of attention.",
+          author: 'Jane Doe',
+          views: 251236,
+          date: '2021-03-04T04:00:00.000Z',
+        })
+      
     );
   });
 
