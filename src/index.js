@@ -5,7 +5,11 @@ const { max } = require('moment');
 
 const chirpViews = JSON.parse(fs.readFileSync(`${__dirname}/chirpViews.json`));
 
-const truncateOutput = (msg) => {
+const truncateMsg = (msg, len) => {
+  const maxLen = 140;
+  const suffix = '...';
+  const diff = len - msg.length;
+  return msg.substring(0, maxLen - (diff + suffix.length)) + suffix;
 };
 
 const formatDate = (date) => {
@@ -24,13 +28,19 @@ const formatChirpView = (chirpView) => {
 
   let output = msg + " " + formatDate(date) + " " + viewCount + " " + author;
 
-  if(output.length > 140){
-    output = truncateOutput(msg) + " " + formatDate(date) + " " + viewCount + " " + author;
-  }
-
   if(hasEmoji(viewCount)){
     const fireEmoji = " " + emoji.get("fire");
     output += fireEmoji;
+  }
+
+  const outputLen = output.length;
+
+  if(outputLen > 140){
+    output = truncateMsg(msg, outputLen) + " " + formatDate(date) + " " + viewCount + " " + author;
+    if(hasEmoji(viewCount)){
+      const fireEmoji = " " + emoji.get("fire");
+      output += fireEmoji;
+    }
   }
   
   return output;
