@@ -18,6 +18,11 @@ const deserveEmoji = (views) => {
   return parseInt(views) > 100000  ? true : false;
 };
 
+const getFireEmoji = () => {
+  const fireEmoji = " " + emoji.get("fire");
+  return fireEmoji;
+};
+
 const formatChirpView = (chirpView) => {
   const msg = chirpView.message;
   const author = chirpView.author;
@@ -26,19 +31,13 @@ const formatChirpView = (chirpView) => {
 
   let output = msg + " " + formatDate(date) + " " + viewCount + " " + author;
 
-  if(deserveEmoji(viewCount)){
-    const fireEmoji = " " + emoji.get("fire");
-    output += fireEmoji;
-  }
+  if(deserveEmoji(viewCount)) output += getFireEmoji();
 
   const outputLen = output.length;
 
   if(outputLen > 140){
     output = truncateMsg(msg, outputLen) + " " + formatDate(date) + " " + viewCount + " " + author;
-    if(deserveEmoji(viewCount)){
-      const fireEmoji = " " + emoji.get("fire");
-      output += fireEmoji;
-    }
+    if(deserveEmoji(viewCount)) output += getFireEmoji();
   }
   
   return output;
